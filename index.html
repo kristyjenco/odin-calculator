@@ -4,9 +4,29 @@
         <meta charset="UTF-8">
         <title>Calculator</title>
         <style>
-            /* #main {
+            body {
                 display: flex;
-            } */
+                justify-content: center;
+                align-items: center;
+            }
+            #main {
+                border: 1px solid black;
+                width: 300px;
+                padding: 8px;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+             #text {
+                border: 1px solid black;
+                width: 250px;
+                font-size: 32px;
+                color: white;
+                background-color: gray;
+                text-align: right;
+                box-sizing: border-box;
+             }
             .button {
                 font-size: 32px;
                 color: white;
@@ -20,7 +40,7 @@
     </head>
     <body>
         <div id="main">
-            <input type="text" id="text">
+            <div id="text">0</div>
             <div class="button-row">
             <button type="button" class="button" value="7">7</button>
             <button type="button" class="button" value="8">8</button>

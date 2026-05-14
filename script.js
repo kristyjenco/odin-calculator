@@ -10,7 +10,6 @@ const multiplyNumber = function(firstNumber, secondNumber) {
 const divideNumber = function(firstNumber, secondNumber) {
     return firstNumber / secondNumber;
 } 
-let parentContainer = document.getElementById("main");
 let textBox = document.getElementById("text");
 let buttons = document.querySelectorAll(".button");
 let currentInput = "";
@@ -20,34 +19,35 @@ let operate = function() {
     buttons.forEach(button => {
         button.addEventListener("click", event =>{
             let value = event.target.value;
-            if(value == "=") {
-                firstInput = Number(firstInput);
-                currentInput = Number(currentInput);
-                if(operator == "+") {
-                   textBox.value = addNumber(firstInput, currentInput);
-                }
-                else if(operator == "-") {
-                    textBox.value = subtractNumber(firstInput, currentInput);
-                }
-                else if(operator == "*") {
-                    textBox.value = multiplyNumber(firstInput, currentInput);
-                }
-                else if(operator == "/") {
-                    textBox.value = divideNumber(firstInput, currentInput);
-                }
-            }
-            else if(value != "+" && value != "-" && value != "*" && value != "/" && value != "=")
-            {
-                currentInput = currentInput + value;
-                textBox.value = currentInput;
-            }
-            else if(value == "clear") {
+            if(value == "clear") {
                 currentInput = "";
                 firstInput = "";
                 operator = "";
+                textBox.textContent = 0;
+            }
+            else if(value == "=") {
+                firstInput = Number(firstInput);
+                currentInput = Number(currentInput);
+                if(operator == "+") {
+                   textBox.textContent = addNumber(firstInput, currentInput);
+                }
+                else if(operator == "-") {
+                    textBox.textContent = subtractNumber(firstInput, currentInput);
+                }
+                else if(operator == "*") {
+                    textBox.textContent = multiplyNumber(firstInput, currentInput);
+                }
+                else if(operator == "/") {
+                    textBox.textContent = divideNumber(firstInput, currentInput);
+                }
+            }
+            else if(value != "+" && value != "-" && value != "*" && value != "/" && value != "=" && value != "clear")
+            {
+                currentInput = currentInput + value;
+                textBox.textContent = currentInput;
             }
             else {
-                textBox.value = value;
+                textBox.textContent = value;
                 firstInput = currentInput;
                 currentInput = "";
                 operator = value;
