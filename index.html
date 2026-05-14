@@ -8,24 +8,37 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                background-color: #D5FFFF;
             }
             #main {
                 border: 1px solid black;
+                background-color: #DCDCDC;
                 width: 300px;
-                padding: 8px;
+                height: 350px;
+                padding: 20px;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                gap: 8px;
+                border-radius: 20px;
+                box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.5);
             }
              #text {
                 border: 1px solid black;
-                width: 250px;
+                width: 100%;
                 font-size: 32px;
                 color: white;
-                background-color: gray;
+                background-color: black;
                 text-align: right;
                 box-sizing: border-box;
+                padding-right: 5px;
+                margin-bottom: 10px;
+             }
+             .button-row {
+                display: flex;
+                width: 100%;
+                gap: 8px;
              }
             .button {
                 font-size: 32px;
@@ -33,8 +46,16 @@
                 background-color: gray;
                 border: 1px solid black;
                 border-radius: 8px;
-                padding: 20px;
-                margin: 2px;
+                flex: 1;
+            }
+            .button:hover {
+                background-color: #3b3b3b;
+            }
+            #divide, #multiply, #subtract, #add {
+                background-color: #0F52BA;
+            }
+            #divide:hover, #multiply:hover, #subtract:hover, #add:hover {
+                background-color: #083B89;
             }
         </style>
     </head>
