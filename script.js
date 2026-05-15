@@ -15,76 +15,47 @@ let buttons = document.querySelectorAll(".button");
 let currentInput = "";
 let firstInput = "";
 let operator = "";
-let lastOperator = "";
-let lastSecondInput = "";
-let shouldResetDisplay = false;
-let calculate = function(firstNumber, secondNumber, operator) {
-    firstNumber = Number(firstNumber);
-    secondNumber = Number(secondNumber);
-    if(operator == "+") {
-        return addNumber(firstNumber, secondNumber);
-    }
-    else if(operator == "-") {
-        return subtractNumber(firstNumber, secondNumber);
-    }
-    else if(operator == "*") {
-        return multiplyNumber(firstNumber, secondNumber);
-    }
-    else if(operator == "/") {
-        return divideNumber(firstNumber, secondNumber);
-    }  
-}
-function isOperator(value) {
-    return value == "+" || value == "-" || value == "*" || value == "/";
-}
 let operate = function() {
     buttons.forEach(button => {
         button.addEventListener("click", event =>{
             let value = event.target.value;
             if(value == "clear") {
-            currentInput = "";
-            firstInput = "";
-            operator = "";
-            lastOperator = "";
-            lastSecondInput = "";
-            shouldResetDisplay = false;
-            textBox.textContent = "0";
-        }
+                currentInput = "";
+                firstInput = "";
+                operator = "";
+                textBox.textContent = 0;
+            }
             else if(value == "=") {
-                if(operator !== "" && currentInput !== "") {
-                    firstInput = Number(firstInput);
-                    currentInput = Number(currentInput);
-                    let result = calculate(firstInput, currentInput, operator);
-                    textBox.textContent = result;
-                    lastOperator = operator;
-                    lastSecondInput = currentInput;
-                    firstInput = result;
-                    currentInput = "";
-                    operator = "";
+                firstInput = Number(firstInput);
+                currentInput = Number(currentInput);
+                if(operator == "+") {
+                   textBox.textContent = addNumber(firstInput, currentInput);
+                   firstInput = addNumber(firstInput, currentInput);
                 }
-                else if(lastOperator !== "" && lastSecondInput !== "") {
-                    let result = calculate(firstInput, lastSecondInput, lastOperator);
-                    textBox.textContent = result;
-                    firstInput = result;
-                    shouldResetDisplay = true;
+                else if(operator == "-") {
+                    textBox.textContent = subtractNumber(firstInput, currentInput);
+                    firstInput = subtractNumber(firstInput, currentInput);
+                }
+                else if(operator == "*") {
+                    textBox.textContent = multiplyNumber(firstInput, currentInput);
+                    firstInput = multiplyNumber(firstInput, currentInput);
+                }
+                else if(operator == "/") {
+                    textBox.textContent = divideNumber(firstInput, currentInput);
+                    firstInput = divideNumber(firstInput, currentInput);
                 }
             }
-            else if(isOperator(value)) {
-            if(firstInput == "") {
+            else if(value != "+" && value != "-" && value != "*" && value != "/" && value != "=" && value != "clear")
+            {
+                currentInput = currentInput + value;
+                textBox.textContent = currentInput;
+            }
+            else {
+                textBox.textContent = value;
                 firstInput = currentInput;
+                currentInput = "";
+                operator = value;
             }
-            else if(currentInput !== "") {
-                let result = calculate(firstInput, currentInput, operator);
-                firstInput = result;
-                textBox.textContent = result;
-            }
-            operator = value;
-            currentInput = "";
-        }
-        else {
-            currentInput += value;
-            textBox.textContent = currentInput;
-        }
         })
     })
 }
