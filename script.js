@@ -1,3 +1,7 @@
+let textBox = document.getElementById("text");
+let currentInput = "";
+let firstInput = "";
+let operator = "";
 const addNumber = function(firstNumber, secondNumber) {
     return firstNumber + secondNumber;
 } 
@@ -10,51 +14,51 @@ const multiplyNumber = function(firstNumber, secondNumber) {
 const divideNumber = function(firstNumber, secondNumber) {
     return firstNumber / secondNumber;
 } 
-let textBox = document.getElementById("text");
-let buttons = document.querySelectorAll(".button");
-let currentInput = "";
-let firstInput = "";
-let operator = "";
+const clearTextbox = function() {
+    currentInput = "";
+    firstInput = "";
+    operator = "";
+    textBox.textContent = 0;
+}
 let operate = function() {
-    buttons.forEach(button => {
+    document.querySelectorAll(".button").forEach(button => {
         button.addEventListener("click", event =>{
-            let value = event.target.value;
-            if(value == "clear") {
-                currentInput = "";
-                firstInput = "";
-                operator = "";
-                textBox.textContent = 0;
+            let buttonPress = event.target.value;
+            if(buttonPress === "clear") {
+                clearTextbox();
             }
-            else if(value == "=") {
+            else if(buttonPress === "=") {
                 firstInput = Number(firstInput);
                 currentInput = Number(currentInput);
-                if(operator == "+") {
-                   textBox.textContent = addNumber(firstInput, currentInput);
-                   firstInput = addNumber(firstInput, currentInput);
-                }
-                else if(operator == "-") {
-                    textBox.textContent = subtractNumber(firstInput, currentInput);
-                    firstInput = subtractNumber(firstInput, currentInput);
-                }
-                else if(operator == "*") {
-                    textBox.textContent = multiplyNumber(firstInput, currentInput);
-                    firstInput = multiplyNumber(firstInput, currentInput);
-                }
-                else if(operator == "/") {
-                    textBox.textContent = divideNumber(firstInput, currentInput);
-                    firstInput = divideNumber(firstInput, currentInput);
+                switch (operator) {
+                    case "+":
+                        textBox.textContent = addNumber(firstInput, currentInput);
+                        firstInput = addNumber(firstInput, currentInput);
+                        break;
+                    case "-":
+                        textBox.textContent = subtractNumber(firstInput, currentInput);
+                        firstInput = subtractNumber(firstInput, currentInput);
+                        break;
+                    case "*":
+                        textBox.textContent = multiplyNumber(firstInput, currentInput);
+                        firstInput = multiplyNumber(firstInput, currentInput);
+                        break;
+                    case "/":
+                        textBox.textContent = divideNumber(firstInput, currentInput);
+                        firstInput = divideNumber(firstInput, currentInput);
+                        break;
                 }
             }
-            else if(value != "+" && value != "-" && value != "*" && value != "/" && value != "=" && value != "clear")
+            else if(!isNaN(buttonPress))
             {
-                currentInput = currentInput + value;
+                currentInput = currentInput + buttonPress;
                 textBox.textContent = currentInput;
             }
             else {
-                textBox.textContent = value;
+                textBox.textContent = buttonPress;
                 firstInput = currentInput;
                 currentInput = "";
-                operator = value;
+                operator = buttonPress;
             }
         })
     })
